@@ -65,3 +65,24 @@ var currentQuestion
 var timeLeft
 var timerEl
 
+// start a countdown timer by decrementing the timeLeft variable
+// update the timer on the webpage
+// handle what happens when the timer reaches 0 (either moving to the next question or ending the quiz)
+
+function startTimer() {
+  timerEl = setInterval(function () {
+    timeLeft--                           // decrement var by 1
+    if (timeLeft > 0) {
+      timer.textContent = timeLeft            // display the remaining time
+    } else {
+      clearInterval(timerEl)                  // stop timer if
+      currentQuestion++                            // move to the next question
+      if (currentQuestion < questionsArr.length) {
+        getQuestion()                           // display next question
+      } else {
+        endQuiz()
+      }
+    }
+  }, 1000);
+}
+
