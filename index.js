@@ -86,6 +86,24 @@ function startTimer() {
   }, 1000);
 }
 
+// initialize the quiz by setting the score and currentQuestion variables
+// clear the quiz element
+// retrieve a previous score from localStorage (if it exists) 
+// and create a button with the text "Start Quiz" to begin the quiz
+
+function startQuiz() {
+  score = 0                                              // set the beginning score
+  currentQuestion = 0
+  quiz.innerHTML = ""                                    // clear the html content
+  finalScore = localStorage.getItem("previous-score")         // retrieve the value stored in storage. assign to final score to allow access later
+  if (finalScore) {                                       // check if var has a value
+    finalScoreEl.textContent = "Score: " + finalScore         // display the score
+    quiz.appendChild(finalScoreEl)                        // add child element to make score visible
+  }
+  answerBtn.id = "start-quiz"                       // set id attribute
+  answerBtn.textContent = "Start Quiz"                   // set the text to display on the button
+  quiz.appendChild(answerBtn)                         // make button visible 
+}
 
 // if the start button is clicked begin the quiz
 // or if a button within the choices is clicked validate the answer
@@ -113,3 +131,16 @@ quiz.onclick = function (e) {                         // assign function to when
   }
 };
 
+
+// clear the quiz
+// calculate and stores the percentage score
+// restart the quiz
+
+function endQuiz() {    
+  quiz.innerHTML = ""                           // clear the html content
+  var percentage = Math.round((score / questionsArr.length) * 100) + "%"          // calculate and round the score
+  localStorage.setItem("previous-score", percentage)       // store % in storage so it can be retrieved later
+  startQuiz()                                     // restart the quiz
+}
+
+startQuiz()
