@@ -131,6 +131,33 @@ quiz.onclick = function (e) {                         // assign function to when
   }
 };
 
+// set up the display of a question by clearing the quiz element
+// retrieve the current question object
+// create buttons for each multiple-choice option
+// display the question and options
+// initialize the timer
+// start the countdown
+
+
+function getQuestion() {
+  timeLeft = 30                                  // set timer to 30 sec
+  quiz.innerHTML = ""                                 // clear html content inside
+  var questionAsked = questionsArr[currentQuestion]        // retrieve the question from the list
+  question.textContent = questionAsked.question             // display question on a page
+  quiz.appendChild(question)                                // make it visible
+  var choices = document.createElement("div")            // create new div and to all the choices
+  choices.id = "choices"                              // set the id attribute to identify the el later
+  quiz.appendChild(choices)                              // make them visible
+  questionAsked.options.forEach(function (choice) {             // start a loop to repeat each option
+    var choiceBtn = document.createElement("button")        // create new btn to assign to choiceBtn 
+    choiceBtn.textContent = choice                    // set the text content of the btn el to display option 
+    choices.appendChild(choiceBtn)                 // make bt visible on a page
+  });
+  timer.id = "timer"                            // set id timer
+  timer.textContent = timeLeft                      // display the remaining time
+  quiz.appendChild(timer)                                // make it visible
+  startTimer()                                 // begin countdown
+}
 
 // clear the quiz
 // calculate and stores the percentage score
